@@ -11,7 +11,7 @@
    ```bash
    <!-- TODO: UPDATE TO MY  -->
    git clone https://github.com/Kkundan/
-   cd langchain-crash-course
+   cd rag-chatbot
    ```
 
 2. Install dependencies using Poetry:
