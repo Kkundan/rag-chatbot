@@ -38,12 +38,18 @@ def chat_with_user():
         response = process_user_input(user_input)
         print(f"Bot: {response}")
 
+# Load environment variables from .env file
+load_dotenv()
+
+# Get username and password from .env file
+access_token = os.getenv("SAVIYNT_API_ACCESS_TOKEN")
+
+# Authenticate and get access token
 def authenticate():
     # Simulate the process of obtaining an access token
     # In a real scenario, this would involve making a request to the authentication endpoint
     # of the API with credentials and receiving an access token in response.
     # This is just a placeholder, replace it with actual authentication logic.
-    access_token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzeXN0ZW1hZG1pbiIsImV4cCI6MTcyMTUxNjE4MCwiaWF0IjoxNzIxNTEyNTgwLCJyb2xlcyI6WyJST0xFX0FETUlOIl19.AVbbuhLaIBpjigJN90BLEii-SxvyYpcUMvqM4H_UVJA"
     return {"Authorization": f"Bearer {access_token}"}
 
 # Process user input
