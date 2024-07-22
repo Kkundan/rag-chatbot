@@ -1,5 +1,5 @@
 import os
-from langchain.text_splitter import CharacterTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader, PyPDFLoader
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
@@ -7,29 +7,35 @@ from langchain.schema import AIMessage, HumanMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_community.llms import Ollama
+from langchain_community.embeddings import OllamaEmbeddings
+import logging
 
-def initialize_vector_store():
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+def initialize_vector_store(embeddings,db):
     # Define the directory containing the text file and the persistent directory
     current_dir = os.path.dirname(os.path.abspath(__file__))
     file_dir = os.path.join(os.path.dirname(current_dir), "resources")
     # file_path = os.path.join(file_dir, "developers_handbook_for_rest_integration_developers_handbook.pdf")
 
-    persistent_directory = os.path.join(current_dir, "db", "chroma_db_with_metadata")
+    persistent_directory = os.path.join(current_dir, "db", db)
 
     # Check if the Chroma vector store already exists
     if not os.path.exists(persistent_directory):
         print("Persistent directory does not exist. Initializing vector store...")
-        initialize_chroma_vector_store(file_dir, persistent_directory)
+        initialize_chroma_vector_store(llm, embeddings,file_dir, persistent_directory)
     else:
         print("Persistent directory already exists. Loading vector store...")
 
     return persistent_directory
 
 
-def initialize_chroma_vector_store(file_dir, persistent_directory):
+def initialize_chroma_vector_store(embeddings, file_dir, persistent_directory):
     # Ensure the pdf file exists
     if not os.path.exists(file_dir):
-        raise FileNotFoundError(f"The file {file_dir} does not exist. Please check the path.")
+        raise FileNotFoundError(f"The directory {file_dir} does not exist. Please check the path.")
 
     # List all pdf files in the directory
     pdf_files = [f for f in os.listdir(file_dir) if f.endswith(".pdf")]
@@ -46,30 +52,19 @@ def initialize_chroma_vector_store(file_dir, persistent_directory):
             documents.append(doc)
 
     # Split the documents into chunks
-    text_splitter = CharacterTextSplitter()
+    text_splitter = RecursiveCharacterTextSplitter()
     docs = text_splitter.split_documents(documents)
 
     # Display information about the split documents
-    print("\n--- Document Chunks Information ---")
-    print(f"Number of document chunks: {len(docs)}")
+    logger.info("\n--- Document Chunks Information ---")
+    logger.info(f"Number of document chunks: {len(docs)}")
 
     # Create embeddings
-    print("\n--- Creating embeddings ---")
-    embeddings = OpenAIEmbeddings(model="text-embedding-3-small")  # Update to a valid embedding model if needed
-    print("\n--- Finished creating embeddings ---")
-
-    # Create the vector store and persist it automatically
-    print("\n--- Creating vector store ---")
     db = Chroma.from_documents(docs, embeddings, persist_directory=persistent_directory)
     print("\n--- Finished creating vector store ---")
 
 
-def retrieve_relevant_documents(query, persistent_directory, chat_history,search_type, search_kwargs):
-    # Define the embedding model
-    embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
-    
-    # Create a ChatOpenAI model
-    model = ChatOpenAI(model="gpt-4o")
+def retrieve_relevant_documents(llm, embeddings, query, persistent_directory, chat_history,search_type, search_kwargs):
 
     # Load the existing vector store with the embedding function
     db = Chroma(persist_directory=persistent_directory, embedding_function=embeddings)
@@ -101,7 +96,7 @@ def retrieve_relevant_documents(query, persistent_directory, chat_history,search
     # Create a history-aware retriever
     # This uses the LLM to help reformulate the question based on chat history
     history_aware_retriever = create_history_aware_retriever(
-        model, retriever, contextualize_q_prompt
+        llm, retriever, contextualize_q_prompt
     )
 
     # Answer question prompt
@@ -128,47 +123,35 @@ def retrieve_relevant_documents(query, persistent_directory, chat_history,search
 
     # Create a chain to combine documents for question answering
     # `create_stuff_documents_chain` feeds all retrieved context into the LLM
-    question_answer_chain = create_stuff_documents_chain(model, qa_prompt)
+    question_answer_chain = create_stuff_documents_chain(llm, qa_prompt)
 
     # Create a retrieval chain that combines the history-aware retriever and the question answering chain
     rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
 
     return rag_chain.invoke({"input": query, "chat_history": chat_history})
-    # # Retrieve relevant documents based on the query
-    # retriever = db.as_retriever(search_type=search_type, search_kwargs=search_kwargs)
-    # relevant_docs = retriever.invoke(query)
 
-    # # Display the relevant results with metadata
-    # print("\n--- Relevant Documents ---")
-    # for i, doc in enumerate(relevant_docs, 1):
-    #     print(f"Document {i}:\n{doc.page_content}\n")
-    #     if doc.metadata:
-    #         print(f"Source: {doc.metadata.get('source', 'Unknown')}\n")
-
-    # combined_text = f"Here are some documents that might help answer the question:\n\n"
-    # combined_text += "\n\n".join([doc.page_content for doc in relevant_docs])
-    # combined_text += "\n\nPlease provide an answer based only on the provided documents. If the answer is not found in the documents, respond with 'I'm not sure'."
-
-
-    # # Define the messages for the model
-    # messages = [
-    #     SystemMessage(content="You are a helpful assistant."),
-    #     HumanMessage(content=combined_text),
-    # ]
-
-    # # Invoke the model with the combined input
-    # result = model.invoke(messages)
-
-    # # Display the full result and content only
-    # print("\n--- Generated Response ---")
-    # # print("Full result:")
-    # # print(result)
-    # print("Content only:")
-    # print(result.content)
 
 
 def main():
-    persistent_directory = initialize_vector_store()
+
+    # db = "chroma_db_with_metadata"
+    # llm = Ollama(model="gemma2:9b")
+    # embeddings = OllamaEmbeddings(model="nomic-embed-text") #text-embedding-3-small, nomic-embed-text
+    
+    db = "chroma_db_with_metadata"
+    llm = ChatOpenAI(model="gpt-4o")
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-small") 
+
+
+    # db = "chroma_db_with_mxbai-embed-large"
+    # llm = Ollama(model="gemma2:9b")
+    # embeddings = OllamaEmbeddings(model="mxbai-embed-large") 
+
+
+    # result = llm.invoke("Tell me a joke")
+    # print(f"AI: {result}")
+
+    persistent_directory = initialize_vector_store(embeddings,db)
     query = "ConnectionJson using basic authentication with HMAC?"
 
     print("Start chatting with the AI! Type 'exit' to end the conversation.")
@@ -178,7 +161,7 @@ def main():
         if query.lower() == "exit":
             break
         # Process the user's query through the retrieval chain
-        result = retrieve_relevant_documents(query, persistent_directory, chat_history, "similarity", {"k": 1})
+        result = retrieve_relevant_documents(llm, embeddings, query, persistent_directory, chat_history, "similarity", {"k": 1})
         # Display the AI's response
         print(f"AI: {result['answer']}")
         # Update the chat history

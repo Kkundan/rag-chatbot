@@ -1,0 +1,2271 @@
+---
+  openapi: 3.1.0
+  info:
+    title: Saviynt Enterprise Identity Cloud API Reference
+    description: This Collection provides the details of the supported methods for
+      the Saviynt Enterprise Identity Cloud (EIC)
+    version: 5.0.0
+    termsOfService: https://saviynt.com/terms/
+    contact:
+      name: API Support
+      url: https://www.saviynt.com/support
+      email: support@saviynt.com
+    license:
+      name: Apache 2.0
+      url: https://www.apache.org/licenses/LICENSE-2.0.html
+    x-logo:
+      url: https://saviynt.com/wp-content/uploads/2019/04/Saviynt_logo_Navy.svg
+  servers:
+    - url: https://{tenant}.saviyntcloud.com/ECM/api/v5
+      variables:
+        tenant:
+          description: tenant
+          default: example
+  security:
+    - bearerAuth: []
+  tags:
+    - name: auth
+      x-displayName: Authentication
+      description: APIs for managing user login, logout, session management, and API
+        token issuance.
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: users
+      x-displayName: Users
+      description: APIs for creating, retrieving, updating, and deleting user
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: accounts
+      x-displayName: Accounts
+      description: APIs for managing user accounts , including creating, retrieving,
+        updating, enabling,  disabling , suspending.
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: access
+      x-displayName: Access
+      description: APIs for managing user access, including adding and removing access
+        on existing accounts.
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: entitlements
+      x-displayName: Entitlements
+      description: APIs for managing entitlements
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: privileges
+      x-displayName: Privileges
+      description: APIs for managing Privileges
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: roles
+      x-displayName: Roles
+      description: APIs for managing Roles
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: groups
+      x-displayName: User Groups
+      description: APIs for managing User Groups
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: systems
+      x-displayName: Security Systems
+      description: APIs for managing Security Systems
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: endpoints
+      x-displayName: Endpoints
+      description: APIs for managing Endpoints
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: connections
+      x-displayName: Connections
+      description: APIs for managing Connections
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: entitlement-types
+      x-displayName: Entitlement Types
+      description: APIs for managing Entitlement Types
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: dynamic-attributes
+      x-displayName: Dynamic Attributes
+      description: APIs for managing Dynamic Attributes
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: organizations
+      x-displayName: Organizations
+      description: APIs for managing Organization
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: analytics
+      x-displayName: Analytics
+      description: APIs for managing Analytics
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: access-recommendations
+      x-displayName: Access Recommendations
+      description: APIs for managing Access Recommendations
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: dashboards
+      x-displayName: Dashboards
+      description: APIs for managing Dashboard
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: request-access
+      x-displayName: Request Access
+      description: APIs for managing Access Request
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: request-history
+      x-displayName: Request History
+      description: APIs for managing Request History
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: request-approval
+      x-displayName: Request Approval
+      description: APIs for managing Request Approval
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: request-user
+      x-displayName: Request User
+      description: APIs for managing User Request
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: request-role
+      x-displayName: Request Role
+      description: APIs for managing Role Request
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: request-organization
+      x-displayName: Request Organization
+      description: APIs for managing Organization Requests
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: arstasks
+      x-displayName: Tasks
+      description: APIs for managing Tasks
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: delegates
+      x-displayName: User Delegation
+      description: APIs for managing User Delegation
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: attestations
+      x-displayName: Attestations
+      description: APIs for managing Attestations
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: campaigns
+      x-displayName: Campaigns
+      description: APIs for managing Campaigns
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: campaigns-user-manager
+      x-displayName: User Manager Campaigns
+      description: APIs for managing User Manager Campaigns
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: campaigns-entitlement-owner
+      x-displayName: Entitlement Owner Campaigns
+      description: APIs for managing Entitlement Owner Campaigns
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: campaigns-application-owner
+      x-displayName: Application Owner Campaigns
+      description: APIs for managing Application Owner Campaigns
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: sod
+      x-displayName: Segregation of Duties
+      description: APIs for managing SODs
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: security
+      x-displayName: Security
+      description: APIs for managing Password
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: utils
+      x-displayName: Common Utilities
+      description: APIs for common Utilities
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: jobs
+      x-displayName: Job Management
+      description: APIs for managing Job
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: transport
+      x-displayName: Transport
+      description: APIs for managing Transport
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: policies
+      x-displayName: Provisioning Policies
+      description: APIs for managing
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: datasets
+      x-displayName: Datasets
+      description: APIs for managing Dataset
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: role-membership
+      x-displayName: Role Membership
+      description: APIs for managing role membership
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+    - name: sav-roles
+      x-displayName: Sav Roles
+      description: APIs for managing Sav Roles
+      externalDocs:
+        description: Product Documentation
+        url: https://docs.saviyntcloud.com/
+  externalDocs:
+    description: Documentation
+    url: https://docs.saviyntcloud.com/
+  paths:
+    /api/login:
+      servers:
+        - url: https://{tenant}.saviyntcloud.com/ECM
+          variables:
+            tenant:
+              description: tenant
+              default: example
+      post:
+        security: []
+        tags:
+          - auth
+        summary: Get Authorization Token
+        description: >-
+          The `Bearer Authentication scheme` is dedicated to the
+          authentication using a token and is described by the [RFC6750]. Even if
+          this scheme comes from an OAuth2 specification, you can still use it as
+          a way to exchange between a client and a server.
+  
+          The SSM API currently requires the HTTP authentication scheme `Bearer` for authentication. All requests must have a valid `Token` specified in the HTTP Authorization header with the `Bearer` scheme.
+  
+          > https://example.saviyntcloud.com/ECM/api/login 
+  
+  
+          A `POST` request by passing 'username' and 'password' in `json` text in the `body`, will return a `Token` in the response which can be passed in a `header` variable for subsequent requests
+        operationId: getAuthorizationToken
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: ""
+                  password:
+                    type: string
+                    example: ""
+              examples:
+                Get Authorization Token:
+                  value: ""
+        responses:
+          "200":
+            description: Get Token
+            headers:
+              Cache-Control:
+                schema:
+                  type: string
+                  example: no-store
+              Content-Length:
+                schema:
+                  type: string
+                  example: "2167"
+              Date:
+                schema:
+                  type: string
+                  example: Fri, 17 Aug 2018 22:21:22 GMT
+              Server:
+                schema:
+                  type: string
+                  example: Apache-Coyote/1.1
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    access_token:
+                      type: string
+                      example: "*****"
+                    expires_in:
+                      type: number
+                      example: 1800
+                    refresh_token:
+                      type: string
+                      example: refreshTokenabcd*******
+                    roles:
+                      type: array
+                      items:
+                        type: string
+                        example: ROLE_ADMIN
+                      example:
+                        - ROLE_ADMIN
+                    token_type:
+                      type: string
+                      example: Bearer
+                    username:
+                      type: string
+                      example: admin
+                examples:
+                  Get Token:
+                    value:
+                      access_token: "*****"
+                      expires_in: 1800
+                      refresh_token: refreshTokenabcd*******
+                      roles:
+                        - ROLE_ADMIN
+                      token_type: Bearer
+                      username: admin
+    /oauth/access_token:
+      servers:
+        - url: https://{tenant}.saviyntcloud.com/ECM
+          variables:
+            tenant:
+              description: tenant
+              default: example
+      post:
+        operationId: refreshAuthorizationToken
+        tags:
+          - auth
+        summary: Refresh Authorization Token
+        description: >-
+          Saviynt Enterprise Identity Cloud (EIC) supports OAuth2.0 . OAuth
+          2.0 is the industry-standard protocol for authorization. OAuth 2.0
+          focuses on client developer simplicity while providing specific
+          authorization flows for web applications. For more information refer
+          link below.
+  
+          **Note**_**:**_ If grails.plugin.springsecurity.rest.refreshtoken.storage.jwt.expiration is set to some value in Config.groovy, refresh token will expire based on this config in api/login api. This will generate a new refresh token if another config - grails.plugin.springsecurity.rest.refreshtoken.new is set to true in Config.groovy. For blank or null, it will return the same Refresh token as passed in oauth/access_token api
+  
+          [OAuth 2.0 documentation](https://oauth.net/2/)
+        security: []
+        requestBody:
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+                properties:
+                  grant_type:
+                    type: string
+                    example: refresh_token
+                  refresh_token:
+                    type: string
+                    example: "************"
+              examples:
+                Refresh Authorization Token:
+                  value:
+                    grant_type: refresh_token
+                    refresh_token: "************"
+        responses:
+          "200":
+            description: Refresh Token
+            headers:
+              Cache-Control:
+                schema:
+                  type: string
+                  example: no-store
+              Date:
+                schema:
+                  type: string
+                  example: Mon, 20 Aug 2018 17:49:19 GMT
+              Server:
+                schema:
+                  type: string
+                  example: Apache-Coyote/1.1
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    access_token:
+                      type: string
+                      example: newaccesstoken
+                    expires_in:
+                      type: number
+                      example: 1800
+                    refresh_token:
+                      type: string
+                      example: ""
+                    roles:
+                      type: array
+                      items:
+                        type: string
+                        example: ROLE_ADMIN
+                      example:
+                        - ROLE_ADMIN
+                    token_type:
+                      type: string
+                      example: Bearer
+                    username:
+                      type: string
+                      example: admin
+                examples:
+                  Refresh Token:
+                    value:
+                      access_token: newaccesstoken
+                      expires_in: 1800
+                      refresh_token: ""
+                      roles:
+                        - ROLE_ADMIN
+                      token_type: Bearer
+                      username: admin
+    /createUser:
+      post:
+        tags:
+          - users
+        summary: Create User
+        description: >-
+          This API onboard or create a new user.
+  
+          The `Authorization` must have `Bearer` followed by `Token`.
+  
+          Optional Parameters:
+  
+          `validateagainstpolicy` - Values: Y/N, default is Y. Checks for the password policy,
+  
+          `statuskey` - Values:1/0, 0 - Inactive, 1 - Active (default),
+  
+          `allowpastdate` - true / false (default). If true, allows startdate to be less than current date,
+  
+          `User params` like   username,   firstname,   preferedFirstName,   lastname,   middlename,   street,   city,   comments,   statuskey,   startdate(MM-dd-yyyy),   enddate(MM-dd-yyyy),   manager (manager username),   password,   location,   jobCode,   jobDescription,   employeeType,   departmentNumber,   title,   state,   companyname,   costcenter,   departmentname,   employeeclass,   entity,   jobcodedesc,   locationdesc,   locationnumber,   siteid,   orgunitid,   region,   regioncode,   owner,   employeeid,   lastsyncdate,   createdate,   email,   phonenumber,   job_function,   country,   displayname,   enabled(can be "1"/"true" or "0"/"false"),   passwordExpired(can be "1"/"true" or "0"/"false"),   accountExpired(can be "1"/"true" or "0"/"false"),   accountLocked(can be "1"/"true" or "0"/"false"),   secondaryManager,   createdBy,   termDate,   vendorManager,   secondaryPhone,   secondaryEmail,   customproperty<1-50>,   hcp<1-5>,   ecp<1-5>,   customer(pass the organization name),
+  
+          `securityQuestions` -
+  
+          Example:   "securityQuestions":\[   {   "securityQuestion":"What is your first Pet's name?",   "securityAnswer":"kitty"   },   {   "securityQuestion":"What is your favorite food?",   "securityAnswer":"food"   }   \],
+  
+          `checkrules` - true/ false (default : true), if true, then rules will be evaluated immediately, if false rules will be evaluated by a job. If checkrulesforapi configuration(true/false/null) is set in the configuration table, then it will take precendence over checkrules parameter.
+  
+          `inlineruleevaluation` - true/ false (default is true), if true then rules will be evaluated immediately, if false rules will be evaluated by a job.
+  
+          _**Note**_ - CreateUser API will not invoke workflow based on the _**User Modification Workflow**_ configuration. Please use createUserRequest API instead.
+  
+          _**Note**_ - Both `checkrules` and `inlineruleevaluation` need to be set as true for the user update rules to be evaluated immediately.
+  
+          `batchidentifier` - When inlineruleevaluation=false, this Rule Run Unique Identifier can be set and user update rules can be processed later by calling /api/processrules API
+  
+          _**It's highly recommended to pass inlineruleevaluation:"false" for bulk load and call processrules api to evaluate and run the rules after the load is done.**_
+        operationId: createUser
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountExpired:
+                    type: string
+                    example: "true"
+                  accountLocked:
+                    type: string
+                    example: "false"
+                  allowpastdate:
+                    type: string
+                    example: "true"
+                  enabled:
+                    type: string
+                    example: "true"
+                  enddate:
+                    type: string
+                    example: 10-11-2019
+                  firstname:
+                    type: string
+                    example: myfirstname
+                  passwordExpired:
+                    type: string
+                    example: "true"
+                  startdate:
+                    type: string
+                    example: 10-18-2018
+                  statuskey:
+                    type: string
+                    example: "1"
+                  username:
+                    type: string
+                    example: johndoe
+              examples:
+                Create User:
+                  value:
+                    accountExpired: "true"
+                    accountLocked: "false"
+                    allowpastdate: "true"
+                    enabled: "true"
+                    enddate: 10-11-2019
+                    firstname: myfirstname
+                    passwordExpired: "true"
+                    startdate: 10-18-2018
+                    statuskey: "1"
+                    username: johndoe
+        responses:
+          "200":
+            description: Create User
+            headers:
+              Date:
+                schema:
+                  type: string
+                  example: Sat, 11 Aug 2018 00:50:48 GMT
+              Server:
+                schema:
+                  type: string
+                  example: Apache-Coyote/1.1
+              Set-Cookie:
+                schema:
+                  type: string
+                  example: CCSRF-TOKEN=efce7cb9-bea7-455f-9d19-545da8092b72; Path=/
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errorCode:
+                      type: string
+                      example: "0"
+                    message:
+                      type: string
+                      example: " Users created with username johndoe "
+                examples:
+                  Create User:
+                    value:
+                      errorCode: "0"
+                      message: " Users created with username johndoe "
+    /updateUser:
+      post:
+        tags:
+          - users
+        summary: Update User
+        description: >-
+          This method updates a specific "user" record in SSM, based on the
+          input parameter `username` of the relevant user. 
+  
+  
+          All the input parameters it requires are attributes which could be updated for the relevant user record. The attributes which are supplied with valid values as input to the method, will get updated, if the operation is successfully executed.
+  
+  
+          The `Authorization` must have `Bearer` followed by `Token`.
+  
+  
+          Mandatory params:
+  
+  
+          `username`
+  
+  
+          ***OR***
+  
+  
+          `propertytosearch`
+  
+  
+          ***Note*** - If both params are passed, propertytosearch will take precedence.
+  
+  
+          Optional params:
+  
+  
+          `validateagainstpolicy` - Values: Y/N, default is Y. Checks for the password policy,
+  
+  
+          `allowpastdate` - true / false (default). If true, allows startdate to be less than current date,
+  
+  
+          `statuskey` - Values:1/0, 0 - Inactive, 1 - Active,
+  
+  
+          `updatedusername` - update username,
+  
+  
+          `User params` like
+              firstname, 
+              preferedFirstName,
+              lastname,
+              middlename,
+              street,
+              city,
+              comments,
+              statuskey,
+              startdate(MM-dd-yyyy),
+              enddate(MM-dd-yyyy),
+              manager (manager username),
+              password,
+              location,
+              jobCode,
+              jobDescription,
+              employeeType,
+              systemUserName,
+              departmentNumber,
+              title,
+              state,
+              companyname,
+              costcenter,
+              departmentname,
+              employeeclass,
+              entity,
+              jobcodedesc,
+              locationdesc,
+              locationnumber,
+              siteid,
+              orgunitid,
+              region,
+              regioncode,
+              owner,
+              employeeid,
+              lastsyncdate,
+              createdate,
+              email,
+              phonenumber,
+              job_function,
+              country,
+              displayname,
+              enabled(can be "1"/"true" or "0"/"false"),
+              passwordExpired(can be "1"/"true" or "0"/"false"),
+            accountExpired(can be "1"/"true" or "0"/"false"),
+            accountLocked(can be "1"/"true" or "0"/"false"),
+              secondaryManager,
+              createdBy,
+              termDate,
+              vendorManager,
+              secondaryPhone,
+              secondaryEmail,
+              customproperty<1-50>,
+              hcp<1-5>,
+              ecp<1-5>,
+              customer(pass the organization name),
+              
+             `securityQuestions` - 
+  
+          Example: 
+  
+          "securityQuestions":[
+              {
+                "securityQuestion":"What is your first Pet's name?",
+                "securityAnswer":"kitty"
+              },
+              {
+                "securityQuestion":"What is your favorite food?",
+                "securityAnswer":"food"
+              }
+              ],
+  
+              
+          `checkrules` - true/ false (default : true), if true, then rules will be evaluated immediately, if false rules will be evaluated by a job. If checkrulesforapi configuration(true/false/null) is set in the configuration table, then it will take precendence over checkrules parameter.
+  
+  
+          `inlineruleevaluation` - true/ false (default is true), if true then rules will be evaluated immediately, if false rules will be evaluated by a job.
+  
+  
+          ***Note*** - UpdateUser API will not invoke workflow based on the ***User Modification Workflow*** configuration. Please use updateUserRequest API instead.
+  
+  
+          ***Note*** - Both `checkrules` and `inlineruleevaluation` need to be set as true for the user update rules to be evaluated immediately.
+  
+  
+          `batchidentifier` - When inlineruleevaluation=false, this Rule Run Unique Identifier can be set and user update rules can be processed later by calling /api/processrules API
+  
+  
+          ***Note*** - This API supports PUT HTTP method along with POST.
+  
+  
+          ***It's highly recommended to pass inlineruleevaluation:"false" for bulk load and call processrules api to evaluate and run the rules after the load is done.***
+        operationId: updateUser
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customproperty1:
+                    type: string
+                    example: customized value
+                  email:
+                    type: string
+                    example: test@sav.com
+                  employeeType:
+                    type: string
+                    example: RobotID11111
+                  firstname:
+                    type: string
+                    example: John
+                  jobcodedesc:
+                    type: string
+                    example: QA
+                  lastname:
+                    type: string
+                    example: Chipchase
+                  manager:
+                    type: string
+                    example: admin
+                  middlename:
+                    type: string
+                    example: kumar
+                  preferedFirstName:
+                    type: string
+                    example: RoboID111111
+                  propertytosearch:
+                    type: string
+                    example: lastname
+                  statuskey:
+                    type: string
+                    example: "1"
+              examples:
+                Update User:
+                  value:
+                    customproperty1: customized value
+                    email: test@sav.com
+                    employeeType: RobotID11111
+                    firstname: John
+                    jobcodedesc: QA
+                    lastname: Chipchase
+                    manager: admin
+                    middlename: kumar
+                    preferedFirstName: RoboID111111
+                    propertytosearch: lastname
+                    statuskey: "1"
+        responses:
+          "200":
+            description: Update User / Update User - Inactive Manager / Update User -
+              propertytosearch param
+            headers:
+              Access-Control-Allow-Credentials:
+                schema:
+                  type: string
+                  example: "true"
+              Access-Control-Allow-Origin:
+                schema:
+                  type: string
+                  example: http://localhost
+              Cache-Control:
+                schema:
+                  type: string
+                  example: post-check=0, pre-check=0
+              Date:
+                schema:
+                  type: string
+                  example: Fri, 01 Jan 2021 02:05:16 GMT
+              Expires:
+                schema:
+                  type: string
+                  example: Sun, 7 May 1995 12:00:00 GMT
+              Referrer-Policy:
+                schema:
+                  type: string
+                  example: same-origin
+              Server:
+                schema:
+                  type: string
+                  example: Apache-Coyote/1.1
+              Set-Cookie:
+                schema:
+                  type: string
+                  example: CCSRF-TOKEN=248093fc-7f94-40aa-9522-257910954d1c; Path=/
+              Strict-Transport-Security:
+                schema:
+                  type: string
+                  example: max-age=31536000; includeSubdomains
+              X-Content-Type-Options:
+                schema:
+                  type: string
+                  example: nosniff
+              X-Frame-Options:
+                schema:
+                  type: string
+                  example: DENY
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errorCode:
+                      type: string
+                      example: "0"
+                    message:
+                      type: string
+                      example: SUCCESS User Updated Successfully
+                examples:
+                  Update User:
+                    value:
+                      errorCode: "0"
+                      message: SUCCESS User Updated Successfully
+                  Update User - Inactive Manager:
+                    value:
+                      errorCode: "0"
+                      message: " manager with username A007825 is inactive.  User Updated
+                        Successfully"
+                  Update User - propertytosearch param:
+                    value:
+                      errorCode: "0"
+                      message: " User Updated Successfully"
+    /getUser:
+      post:
+        tags:
+          - users
+        summary: Get User Details
+        description: "This method returns a `List` of Users in SSM. \r
+  
+          \r
+  
+          The `Authorization` must have `Bearer` followed by `Token`.\r
+  
+          \r
+  
+          Optional params:\r
+  
+          \r
+  
+          `username` - Specify the username for which you want to get the
+          user attribute details,\r
+  
+          \r
+  
+          `responsefields` - User attributes which you want to see in the
+          response(for encrypted values, mention ecp<1-5>, and for hashed values,
+          mention hcp<1-5>),\r
+  
+          \r
+  
+          `max`,\r
+  
+          \r
+  
+          `offset`,\r
+  
+          \r
+  
+          `sort`,\r
+  
+          \r
+  
+          `order` - asc/desc,\r
+  
+          \r
+  
+          `manager` - username,\r
+  
+          \r
+  
+          `secondarymanager` - userkey *OR* `secondaryManager` -
+          username\r
+  
+          \r
+  
+          `showsecurityanswers` - \"0\"/\"1\" to display encrypted
+          security answers for the user \r
+  
+          \r
+  
+          &nbsp;\r
+  
+          \r
+  
+          \r
+  
+          `filtercriteria` - User fields based on which you want to get
+          the user attribute details(including userkey),\r
+  
+          \r
+  
+          ***OR***\r
+  
+          \r
+  
+          `searchCriteria` - search for a user based on the string passed
+          (eg - “\\*ab\\*” or “\\*ab” or “ab\\*”) in their firstname, lastname,
+          displayname and username only, example - \"ab*\" - This will return all
+          users with firstname or lastname or username starting with \"ab\"\r
+  
+          \r
+  
+          ***OR***\r
+  
+          \r
+  
+          `advsearchcriteria` - search for a user based on the string
+          passed (eg - “\\*ab\\*” or “\\*ab” or “ab\\*”), example -
+          {\"username\":\"a*\", \"firstname\":\"*b\"} - This will return all users
+          with username starting with \"a\" AND firstname ending with \"b\". Exact
+          match search is applicable for types boolean, users, customer. Date can
+          be entered in format - yyyy-MM-dd.\r
+  
+          \r
+  
+          ***OR***\r
+  
+          \r
+  
+          `userQuery` - Sample: “userQuery”:”user.customproperty1='abc' or
+          user.displayname like '%display%'”.\r
+  
+          \r
+  
+          ***Note*** - By default, if no responsefields param is passed,
+          required attrs that will always return are username, email, statuskey,
+          firstname, lastname, employeeid along with other attributes with
+          nonblank values only."
+        operationId: getUserDetails
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  filtercriteria:
+                    type: object
+                    properties:
+                      username:
+                        type: string
+                        example: lmcneil
+                  showsecurityanswers:
+                    type: string
+                    example: "1"
+              examples:
+                Get User Details:
+                  value:
+                    filtercriteria:
+                      username: lmcneil
+                    showsecurityanswers: "1"
+        responses:
+          "200":
+            description: Get User Details / Get User Details 2
+            headers:
+              Access-Control-Allow-Credentials:
+                schema:
+                  type: string
+                  example: "true"
+              Access-Control-Allow-Origin:
+                schema:
+                  type: string
+                  example: http://localhost
+              Cache-Control:
+                schema:
+                  type: string
+                  example: post-check=0, pre-check=0
+              Date:
+                schema:
+                  type: string
+                  example: Thu, 23 Jul 2020 18:46:04 GMT
+              Expires:
+                schema:
+                  type: string
+                  example: Sun, 7 May 1995 12:00:00 GMT
+              Referrer-Policy:
+                schema:
+                  type: string
+                  example: same-origin
+              Server:
+                schema:
+                  type: string
+                  example: Apache-Coyote/1.1
+              Set-Cookie:
+                schema:
+                  type: string
+                  example: CCSRF-TOKEN=94589b88-cb05-4e05-a11d-dc62e85bb238; Path=/
+              Strict-Transport-Security:
+                schema:
+                  type: string
+                  example: max-age=31536000; includeSubdomains
+              X-Content-Type-Options:
+                schema:
+                  type: string
+                  example: nosniff
+              X-Frame-Options:
+                schema:
+                  type: string
+                  example: DENY
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    displaycount:
+                      type: string
+                      example: "1"
+                    errorCode:
+                      type: string
+                      example: "0"
+                    msg:
+                      type: string
+                      example: Successful
+                    totalcount:
+                      type: string
+                      example: "1"
+                    userlist:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          firstname:
+                            type: string
+                            example: John
+                          statuskey:
+                            type: string
+                            example: "1"
+                          userKey:
+                            type: number
+                            example: 5
+                          username:
+                            type: string
+                            example: johndoe
+                          accountExpired:
+                            type: string
+                          accountLocked:
+                            type: string
+                            example: "false"
+                          city:
+                            type: string
+                            example: San Francisco
+                          companyname:
+                            type: string
+                            example: Global Modern Services, Inc. (USA)
+                          costcenter:
+                            type: string
+                            example: GMS USA
+                          country:
+                            type: string
+                            example: USA
+                          createdate:
+                            type: string
+                            example: 06/08/2020T10:35:46+0000
+                          customer:
+                            type: string
+                            example: testorg
+                          customproperty1:
+                            type: string
+                            example: 3aa5550b7fe348b98d7b5741afc65534
+                          displayname:
+                            type: string
+                            example: Logan McNeil
+                          email:
+                            type: string
+                            example: test@gmail.com
+                          employeeType:
+                            type: string
+                            example: Regular
+                          employeeid:
+                            type: string
+                            example: "21001"
+                          enabled:
+                            type: string
+                            example: "true"
+                          encryptedSecurityAnswers:
+                            type: string
+                            example: lhCSZZbYyxHaRZN6L9s4IPXAIwx86J87GEXwt5wIutPnEGkywv4W9UImm9u+qlk67bTNecLwHBClApo9olYBEceyC+h4gcLrjWwLOLlJ3Wc=
+                          failedTries:
+                            type: string
+                            example: "0"
+                          lastPasswordUpdateDate:
+                            type: string
+                            example: 07/23/2020T18:25:58+0000
+                          lastname:
+                            type: string
+                            example: McNeil
+                          location:
+                            type: string
+                            example: San Francisco
+                          passwordExpired:
+                            type: string
+                            example: "false"
+                          phonenumber:
+                            type: string
+                            example: 415789-8904
+                          preferedFirstName:
+                            type: string
+                            example: Logan
+                          savUpdateDate:
+                            type: string
+                            example: 06/08/2020T10:36:03+0000
+                          systemUserName:
+                            type: string
+                            example: lmcneil
+                          title:
+                            type: string
+                            example: Chief Human Resources Officer
+                          updatedate:
+                            type: string
+                            example: 07/23/2020T18:25:58+0000
+                          updateuser:
+                            type: string
+                            example: admin
+                          userSource:
+                            type: string
+                            example: "127"
+                      example:
+                        - firstname: John
+                          statuskey: "1"
+                          userKey: 5
+                          username: johndoe
+                examples:
+                  Get User Details:
+                    value:
+                      displaycount: "1"
+                      errorCode: "0"
+                      msg: Successful
+                      totalcount: "1"
+                      userlist:
+                        - firstname: John
+                          statuskey: "1"
+                          userKey: 5
+                          username: johndoe
+                  Get User Details 2:
+                    value:
+                      displaycount: "1"
+                      errorCode: "0"
+                      msg: Successful
+                      totalcount: "1"
+                      userlist:
+                        - accountExpired: "false"
+                          accountLocked: "false"
+                          city: San Francisco
+                          companyname: Global Modern Services, Inc. (USA)
+                          costcenter: GMS USA
+                          country: USA
+                          createdate: 06/08/2020T10:35:46+0000
+                          customer: testorg
+                          customproperty1: 3aa5550b7fe348b98d7b5741afc65534
+                          displayname: Logan McNeil
+                          email: test@gmail.com
+                          employeeType: Regular
+                          employeeid: "21001"
+                          enabled: "true"
+                          encryptedSecurityAnswers: lhCSZZbYyxHaRZN6L9s4IPXAIwx86J87GEXwt5wIutPnEGkywv4W9UImm9u+qlk67bTNecLwHBClApo9olYBEceyC+h4gcLrjWwLOLlJ3Wc=
+                          failedTries: "0"
+                          firstname: Logan
+                          lastPasswordUpdateDate: 07/23/2020T18:25:58+0000
+                          lastname: McNeil
+                          location: San Francisco
+                          passwordExpired: "false"
+                          phonenumber: 415789-8904
+                          preferedFirstName: Logan
+                          savUpdateDate: 06/08/2020T10:36:03+0000
+                          statuskey: "1"
+                          systemUserName: lmcneil
+                          title: Chief Human Resources Officer
+                          updatedate: 07/23/2020T18:25:58+0000
+                          updateuser: admin
+                          userKey: 12444
+                          userSource: "127"
+                          username: lmcneil
+    /user:
+      get:
+        tags:
+          - users
+        summary: Get List of Users
+        description: "This API returns the user information from SSM. This API will
+          return only the user attributes which are not null or blank.\r
+  
+          \r
+  
+          You can search for a user based on any parameters given below
+          and not only the username.\r
+  
+          \r
+  
+          The `Authorization` must have `Bearer` followed by `Token`. \r
+  
+          \r
+  
+          Mandatory params:\r
+  
+          `q`\r
+  
+          \r
+  
+          Optional params:\r
+  
+          `offset`,\r
+  
+          `max`,\r
+  
+          `sort`,\r
+  
+          `order`,\r
+  
+          `countonly`,\r
+  
+          `fields`\r
+  
+          `showsecurityanswers` - \"0\"/\"1\" to display encrypted
+          security answers for the user"
+        operationId: getListOfUsers
+        parameters:
+          - name: q
+            in: query
+            schema:
+              type: string
+              example: accountExpired:0
+          - name: fields
+            in: query
+            schema:
+              type: string
+              example: firstname,lastname,username
+          - name: sort
+            in: query
+            schema:
+              type: string
+              example: username
+          - name: order
+            in: query
+            schema:
+              type: string
+              example: desc
+          - name: offset
+            in: query
+            schema:
+              type: string
+              example: "2"
+          - name: max
+            in: query
+            schema:
+              type: string
+              example: "2"
+        responses:
+          "200":
+            description: Get User
+            headers:
+              Date:
+                schema:
+                  type: string
+                  example: Tue, 07 Aug 2018 20:08:23 GMT
+              Server:
+                schema:
+                  type: string
+                  example: Apache-Coyote/1.1
+              Set-Cookie:
+                schema:
+                  type: string
+                  example: CCSRF-TOKEN=4e8d3193-c459-4e21-abf7-2f0ee18aad3f; Path=/
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    count:
+                      type: number
+                      example: 2
+                    errorCode:
+                      type: string
+                      example: "0"
+                    msg:
+                      type: string
+                      example: Successful
+                    offset:
+                      type: string
+                      example: "2"
+                    order:
+                      type: string
+                      example: desc
+                    results:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Last Name:
+                            type: string
+                            example: Doe
+                          User Name:
+                            type: string
+                            example: johndoe
+                          firstname:
+                            type: string
+                            example: John
+                      example:
+                        - Last Name: Doe
+                          User Name: johndoe
+                          firstname: John
+                        - Last Name: Doe
+                          User Name: janedoe
+                          firstname: Jane
+                    sort:
+                      type: string
+                      example: username
+                examples:
+                  Get User:
+                    value:
+                      count: 2
+                      errorCode: "0"
+                      msg: Successful
+                      offset: "2"
+                      order: desc
+                      results:
+                        - Last Name: Doe
+                          User Name: johndoe
+                          firstname: John
+                        - Last Name: Doe
+                          User Name: janedoe
+                          firstname: Jane
+                      sort: username
+    /addremoveuserfromrole:
+      post:
+        tags:
+          - role-membership
+        summary: Add/Remove User from SAV ROLE
+        description: "This method grants/removes membership of a \"user\" to one or more
+          roles in SSM.\r
+  
+          \r
+  
+          The `Authorization` must have `Bearer` followed by `Token`. \r
+  
+          \r
+  
+          Mandatory params: \r
+  
+          \r
+  
+          `username` - Username for the user to whom the roles are to be
+          granted,\r
+  
+          \r
+  
+          `rolename` - comma separated values with names of roles that
+          need to be granted,\r
+  
+          \r
+  
+          `operation` (0/1) - 0:Remove and 1:Add"
+        operationId: addRemoveUserFromSavRole
+        requestBody:
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties: {}
+        responses:
+          "200":
+            description: Add Remove User from Sav Role - Success / Add/Remove User from SAV
+              ROLE - Failure
+            headers:
+              Date:
+                schema:
+                  type: string
+                  example: Tue, 11 Sep 2018 01:17:52 GMT
+              Server:
+                schema:
+                  type: string
+                  example: Apache-Coyote/1.1
+              Set-Cookie:
+                schema:
+                  type: string
+                  example: CCSRF-TOKEN=3f2130c1-55ca-4f1a-86a2-1546bc09944a; Path=/
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    errorCode:
+                      type: string
+                      example: "0"
+                    message:
+                      type: string
+                      example: success
+                examples:
+                  Add Remove User from Sav Role - Success:
+                    value:
+                      errorCode: "0"
+                      message: success
+                  Add/Remove User from SAV ROLE - Failure:
+                    value:
+                      errorCode: "1"
+                      message: Bad Request. Association Between User 'johndoe' and role 'ROLE_MANAGER'
+                        already exists.
+    /getAccessDetailsForUser:
+      post:
+        tags:
+          - access
+        summary: Get Access Details For User
+        description: "This API call can be used to get the user details, account
+          details, and details of all the entitlements the user has access to. \r
+  
+          \r
+  
+          This API will return only the entitlement attributes which are
+          not null or not empty.\r
+  
+          \r
+  
+          The `Authorization` must have `Bearer` followed by `Token`. \r
+  
+          \r
+  
+          Mandatory params:\r
+  
+          `username`\r
+
+  
+          Optional params:\r
+  
+          `endpoint`, `max`, `offset`, `entitlementtype`\r
+  
+          \r
+  
+          ***Note*** - This API supports GET HTTP method along with POST."
+        operationId: getAccessDetailsForUser
+        requestBody:
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties:
+                  endpoint:
+                    type: string
+                    example: System1
+                  username:
+                    type: string
+                    example: johndoe
+        responses:
+          "200":
+            description: Get Access Details For User
+            headers:
+              Date:
+                schema:
+                  type: string
+                  example: Wed, 08 Aug 2018 00:13:55 GMT
+              Server:
+                schema:
+                  type: string
+                  example: Apache-Coyote/1.1
+              Set-Cookie:
+                schema:
+                  type: string
+                  example: CCSRF-TOKEN=78a59564-c96d-4d24-9cc1-e05522d397dd; Path=/
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    Accountdetails:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          createdon:
+                            type: string
+                            example: 07/26/2018
+                          customproperty1:
+                            type: string
+                            example: cp1
+                          customproperty10:
+                            type: string
+                            example: cp10
+                          customproperty2:
+                            type: string
+                            example: cp2
+                          customproperty20:
+                            type: string
+                            example: cp20
+                          customproperty30:
+                            type: string
+                            example: cp30
+                          description:
+                            type: string
+                            example: desc
+                          endpoint:
+                            type: string
+                            example: System1
+                          name:
+                            type: string
+                            example: janedoe
+                          status:
+                            type: string
+                            example: "1"
+                      example:
+                        - createdon: 07/26/2018
+                          customproperty1: cp1
+                          customproperty10: cp10
+                          customproperty2: cp2
+                          customproperty20: cp20
+                          customproperty30: cp30
+                          description: desc
+                          endpoint: System1
+                          name: janedoe
+                          status: "1"
+                    Entitlementdetails:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          access:
+                            type: string
+                            example: Select
+                          confidentiality:
+                            type: string
+                            example: "0"
+                          customproperty1:
+                            type: string
+                            example: test
+                          customproperty20:
+                            type: string
+                            example: cp20
+                          customproperty3:
+                            type: string
+                            example: cp3
+                          customproperty8:
+                            type: string
+                            example: cp8
+                          description:
+                            type: string
+                            example: ""
+                          displayname:
+                            type: string
+                            example: Display Name One
+                          endpoint:
+                            type: string
+                            example: System1
+                          entitlementOwner:
+                            example:
+                              - jamessmith
+                              - peterpan
+                            anyOf:
+                              - type: array
+                                items:
+                                  type: string
+                                  example: jamessmith
+                                example:
+                                  - jamessmith
+                                  - peterpan
+                              - type: string
+                                example: ""
+                              - type: string
+                                example: ""
+                              - type: string
+                                example: ""
+                              - type: string
+                                example: ""
+                          entitlementType:
+                            type: string
+                            example: Access
+                          entitlement_glossary:
+                            type: string
+                            example: ""
+                          entitlement_value:
+                            type: string
+                            example: Entitlement1
+                          module:
+                            type: string
+                            example: Select
+                          priviliged:
+                            type: string
+                            example: "0"
+                          requestForm:
+                            type: string
+                            example: Request Form Table
+                          risk:
+                            type: string
+                            example: "0"
+                          soxcritical:
+                            type: string
+                            example: "0"
+                          status:
+                            type: string
+                            example: "1"
+                          syscritical:
+                            type: string
+                            example: "0"
+                          updatedate:
+                            type: string
+                            example: 04/08/2017
+                          updateuser:
+                            type: string
+                            example: "1"
+                      example:
+                        - access: Select
+                          confidentiality: "0"
+                          customproperty1: test
+                          description: ""
+                          displayname: Display Name One
+                          endpoint: System1
+                          entitlementOwner:
+                            - jamessmith
+                            - peterpan
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement1
+                          module: Select
+                          priviliged: "0"
+                          requestForm: Request Form Table
+                          risk: "0"
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 04/08/2017
+                          updateuser: "1"
+                        - access: Select
+                          confidentiality: "0"
+                          customproperty1: test
+                          description: ""
+                          displayname: Display Name One
+                          endpoint: System1
+                          entitlementOwner:
+                            - jamessmith
+                            - peterpan
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement2
+                          module: Select
+                          priviliged: "0"
+                          requestForm: Request Form Table
+                          risk: "0"
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 04/08/2017
+                          updateuser: "1"
+                        - access: Select
+                          confidentiality: "0"
+                          customproperty1: test
+                          description: ""
+                          displayname: Display Name One
+                          endpoint: System1
+                          entitlementOwner:
+                            - jamessmith
+                            - peterpan
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement3
+                          module: Select
+                          priviliged: "0"
+                          requestForm: Request Form Table
+                          risk: "0"
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 04/08/2017
+                          updateuser: "1"
+                        - customproperty1: test
+                          description: ""
+                          displayname: ""
+                          endpoint: System1
+                          entitlementOwner:
+                            - jamessmith
+                            - janedoe
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement4
+                          requestForm: Request Form Table
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 02/22/2017
+                        - customproperty1: ap1
+                          customproperty20: cp20
+                          customproperty3: cp3
+                          customproperty8: cp8
+                          description: ""
+                          displayname: ""
+                          endpoint: System1
+                          entitlementOwner: ""
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement5
+                          requestForm: Request Form Table
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 04/27/2018
+                          updateuser: "191327"
+                        - description: ""
+                          displayname: ""
+                          endpoint: System1
+                          entitlementOwner: ""
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement6
+                          requestForm: Request Form Table
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 02/22/2017
+                        - description: ""
+                          displayname: ""
+                          endpoint: System1
+                          entitlementOwner: ""
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement Name for testing the codec issue within user
+                            manager attestation
+                          requestForm: Request Form Table
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 02/22/2017
+                        - description: ""
+                          displayname: ""
+                          endpoint: System1
+                          entitlementOwner: ""
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement7
+                          requestForm: Request Form Table
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 02/22/2017
+                    PrivilegeDetails:
+                      type: array
+                      items: {}
+                      example: []
+                    UserDetails:
+                      type: object
+                      properties:
+                        Company Name:
+                          type: string
+                          example: Information Technology International
+                        Create Date:
+                          type: string
+                          example: 03/28/2018T07:00:00+0000
+                        customproperty1:
+                          type: string
+                          example: IP
+                        Department Name:
+                          type: string
+                          example: IAM
+                        Job Function:
+                          type: string
+                          example: A dummy name for a Skill Pool Group
+                        Last Name:
+                          type: string
+                          example: Doe
+                        Orgunit ID:
+                          type: string
+                          example: CO
+                        User Name:
+                          type: string
+                          example: johndoe
+                        accountExpired:
+                          type: string
+                          example: "false"
+                        accountLocked:
+                          type: string
+                          example: "false"
+                        city:
+                          type: string
+                          example: Atlanta
+                        comments:
+                          type: string
+                          example: test
+                        country:
+                          type: string
+                          example: US
+                        createdBy:
+                          type: string
+                          example: admin
+                        customproperty10:
+                          type: string
+                          example: ""
+                        customproperty11:
+                          type: string
+                          example: ""
+                        customproperty12:
+                          type: string
+                          example: zzzTHIRD
+                        customproperty13:
+                          type: string
+                          example: ABCDE
+                        customproperty14:
+                          type: string
+                          example: "20160803"
+                        customproperty15:
+                          type: string
+                          example: Data change
+                        customproperty16:
+                          type: string
+                          example: 2016-08-03 00:00:00
+                        customproperty17:
+                          type: string
+                          example: ""
+                        customproperty18:
+                          type: string
+                          example: Allowed
+                        customproperty19:
+                          type: string
+                          example: "1827"
+                        customproperty2:
+                          type: string
+                          example: ""
+                        customproperty20:
+                          type: string
+                          example: INFORMATION TECHNOLOGY INTERNATIONAL B.V.
+                        customproperty21:
+                          type: string
+                          example: ""
+                        customproperty22:
+                          type: string
+                          example: ""
+                        customproperty23:
+                          type: string
+                          example: ""
+                        customproperty24:
+                          type: string
+                          example: ""
+                        customproperty25:
+                          type: string
+                          example: ""
+                        customproperty26:
+                          type: string
+                          example: ""
+                        customproperty27:
+                          type: string
+                          example: ""
+                        customproperty28:
+                          type: string
+                          example: ""
+                        customproperty29:
+                          type: string
+                          example: ""
+                        customproperty3:
+                          type: string
+                          example: Activated
+                        customproperty30:
+                          type: string
+                          example: 2016-09-15 00:30:56
+                        customproperty31:
+                          type: string
+                          example: ""
+                        customproperty32:
+                          type: string
+                          example: ""
+                        customproperty33:
+                          type: string
+                          example: ""
+                        customproperty34:
+                          type: string
+                          example: ""
+                        customproperty35:
+                          type: string
+                          example: ""
+                        customproperty36:
+                          type: string
+                          example: ""
+                        customproperty37:
+                          type: string
+                          example: ""
+                        customproperty38:
+                          type: string
+                          example: ""
+                        customproperty39:
+                          type: string
+                          example: ""
+                        customproperty4:
+                          type: string
+                          example: SITI
+                        customproperty40:
+                          type: string
+                          example: "1"
+                        customproperty5:
+                          type: string
+                          example: C
+                        customproperty6:
+                          type: string
+                          example: John Doe
+                        customproperty7:
+                          type: string
+                          example: J.Doe
+                        customproperty8:
+                          type: string
+                          example: mm
+                        customproperty9:
+                          type: string
+                          example: ""
+                        departmentNumber:
+                          type: string
+                          example: "565"
+                        displayname:
+                          type: string
+                          example: Doe, John
+                        doNotDisturbDelegate:
+                          type: string
+                          example: jackwoods
+                        email:
+                          type: string
+                          example: jdoe@saviynt.com
+                        employeeType:
+                          type: string
+                          example: Contractor
+                        employeeclass:
+                          type: string
+                          example: C
+                        employeeid:
+                          type: string
+                          example: ""
+                        enabled:
+                          type: string
+                          example: "true"
+                        encryptedSecurityAnswers:
+                          type: string
+                          example: 0Ti6Bg7+E6QEKEd+x4GNhjWpG3KQ0jCbDzxhupvqPrTsrFM8vmoV/eq70xasjbuX7/amIxOXFHDVpPyHhDXA2AFHjnrHqung/1lBsLLr6tw=
+                        enddate:
+                          type: string
+                          example: 01/28/2019T08:00:00+0000
+                        failedTries:
+                          type: string
+                          example: "0"
+                        firstname:
+                          type: string
+                          example: John
+                        jobCode:
+                          type: string
+                          example: zzzzzzzz
+                        jobcodedesc:
+                          type: string
+                          example: zzzzzzzz
+                        lastsyncdate:
+                          type: string
+                          example: 02/28/2018T08:00:00+0000
+                        location:
+                          type: string
+                          example: SF-OFC
+                        locationdesc:
+                          type: string
+                          example: 5 Longfellow St.Deer Park
+                        locationnumber:
+                          type: string
+                          example: SF-OFC
+                        manager:
+                          type: string
+                          example: janedoe
+                        middlename:
+                          type: string
+                          example: w
+                        owner:
+                          type: string
+                          example: janedoe
+                        owneronTerminate:
+                          type: string
+                          example: "4"
+                        passwordExpired:
+                          type: string
+                          example: "false"
+                        preferedFirstName:
+                          type: string
+                          example: John
+                        secondaryManager:
+                          type: string
+                          example: jamessmith
+                        startdate:
+                          type: string
+                          example: 01/28/2018T08:00:00+0000
+                        statuskey:
+                          type: string
+                          example: "1"
+                        street:
+                          type: string
+                          example: s
+                        systemUserName:
+                          type: string
+                          example: jdoe
+                        termDate:
+                          type: string
+                          example: 04/28/2018T07:00:00+0000
+                        title:
+                          type: string
+                          example: Analyst
+                        updatedate:
+                          type: string
+                          example: 08/02/2018T04:08:16+0000
+                        updateuser:
+                          type: string
+                          example: admin
+                        vendorManager:
+                          type: string
+                          example: awsadmin
+                    entitlementsCount:
+                      type: number
+                      example: 8
+                    errorCode:
+                      type: string
+                      example: "0"
+                    msg:
+                      type: string
+                      example: Successful
+                    totalEntitlementCount:
+                      type: number
+                      example: 8
+                examples:
+                  Get Access Details For User:
+                    value:
+                      Accountdetails:
+                        - createdon: 07/26/2018
+                          customproperty1: cp1
+                          customproperty10: cp10
+                          customproperty2: cp2
+                          customproperty20: cp20
+                          customproperty30: cp30
+                          description: desc
+                          endpoint: System1
+                          name: janedoe
+                          status: "1"
+                      Entitlementdetails:
+                        - access: Select
+                          confidentiality: "0"
+                          customproperty1: test
+                          description: ""
+                          displayname: Display Name One
+                          endpoint: System1
+                          entitlementOwner:
+                            - jamessmith
+                            - peterpan
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement1
+                          module: Select
+                          priviliged: "0"
+                          requestForm: Request Form Table
+                          risk: "0"
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 04/08/2017
+                          updateuser: "1"
+                        - access: Select
+                          confidentiality: "0"
+                          customproperty1: test
+                          description: ""
+                          displayname: Display Name One
+                          endpoint: System1
+                          entitlementOwner:
+                            - jamessmith
+                            - peterpan
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement2
+                          module: Select
+                          priviliged: "0"
+                          requestForm: Request Form Table
+                          risk: "0"
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 04/08/2017
+                          updateuser: "1"
+                        - access: Select
+                          confidentiality: "0"
+                          customproperty1: test
+                          description: ""
+                          displayname: Display Name One
+                          endpoint: System1
+                          entitlementOwner:
+                            - jamessmith
+                            - peterpan
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement3
+                          module: Select
+                          priviliged: "0"
+                          requestForm: Request Form Table
+                          risk: "0"
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 04/08/2017
+                          updateuser: "1"
+                        - customproperty1: test
+                          description: ""
+                          displayname: ""
+                          endpoint: System1
+                          entitlementOwner:
+                            - jamessmith
+                            - janedoe
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement4
+                          requestForm: Request Form Table
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 02/22/2017
+                        - customproperty1: ap1
+                          customproperty20: cp20
+                          customproperty3: cp3
+                          customproperty8: cp8
+                          description: ""
+                          displayname: ""
+                          endpoint: System1
+                          entitlementOwner: ""
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement5
+                          requestForm: Request Form Table
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 04/27/2018
+                          updateuser: "191327"
+                        - description: ""
+                          displayname: ""
+                          endpoint: System1
+                          entitlementOwner: ""
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement6
+                          requestForm: Request Form Table
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 02/22/2017
+                        - description: ""
+                          displayname: ""
+                          endpoint: System1
+                          entitlementOwner: ""
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement Name for testing the codec issue within user
+                            manager attestation
+                          requestForm: Request Form Table
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 02/22/2017
+                        - description: ""
+                          displayname: ""
+                          endpoint: System1
+                          entitlementOwner: ""
+                          entitlementType: Access
+                          entitlement_glossary: ""
+                          entitlement_value: Entitlement7
+                          requestForm: Request Form Table
+                          soxcritical: "0"
+                          status: "1"
+                          syscritical: "0"
+                          updatedate: 02/22/2017
+                      PrivilegeDetails: []
+                      UserDetails:
+                        Company Name: Information Technology International
+                        Create Date: 03/28/2018T07:00:00+0000
+                        customproperty1: IP
+                        Department Name: IAM
+                        Job Function: A dummy name for a Skill Pool Group
+                        Last Name: Doe
+                        Orgunit ID: CO
+                        User Name: johndoe
+                        accountExpired: "false"
+                        accountLocked: "false"
+                        city: Atlanta
+                        comments: test
+                        country: US
+                        createdBy: admin
+                        customproperty10: ""
+                        customproperty11: ""
+                        customproperty12: zzzTHIRD
+                        customproperty13: ABCDE
+                        customproperty14: "20160803"
+                        customproperty15: Data change
+                        customproperty16: 2016-08-03 00:00:00
+                        customproperty17: ""
+                        customproperty18: Allowed
+                        customproperty19: "1827"
+                        customproperty2: ""
+                        customproperty20: INFORMATION TECHNOLOGY INTERNATIONAL B.V.
+                        customproperty21: ""
+                        customproperty22: ""
+                        customproperty23: ""
+                        customproperty24: ""
+                        customproperty25: ""
+                        customproperty26: ""
+                        customproperty27: ""
+                        customproperty28: ""
+                        customproperty29: ""
+                        customproperty3: Activated
+                        customproperty30: 2016-09-15 00:30:56
+                        customproperty31: ""
+                        customproperty32: ""
+                        customproperty33: ""
+                        customproperty34: ""
+                        customproperty35: ""
+                        customproperty36: ""
+                        customproperty37: ""
+                        customproperty38: ""
+                        customproperty39: ""
+                        customproperty4: SITI
+                        customproperty40: "1"
+                        customproperty5: C
+                        customproperty6: John Doe
+                        customproperty7: J.Doe
+                        customproperty8: mm
+                        customproperty9: ""
+                        departmentNumber: "565"
+                        displayname: Doe, John
+                        doNotDisturbDelegate: jackwoods
+                        email: jdoe@saviynt.com
+                        employeeType: Contractor
+                        employeeclass: C
+                        employeeid: ""
+                        enabled: "true"
+                        encryptedSecurityAnswers: 0Ti6Bg7+E6QEKEd+x4GNhjWpG3KQ0jCbDzxhupvqPrTsrFM8vmoV/eq70xasjbuX7/amIxOXFHDVpPyHhDXA2AFHjnrHqung/1lBsLLr6tw=
+                        enddate: 01/28/2019T08:00:00+0000
+                        failedTries: "0"
+                        firstname: John
+                        jobCode: zzzzzzzz
+                        jobcodedesc: zzzzzzzz
+                        lastsyncdate: 02/28/2018T08:00:00+0000
+                        location: SF-OFC
+                        locationdesc: 5 Longfellow St.Deer Park
+                        locationnumber: SF-OFC
+                        manager: janedoe
+                        middlename: w
+                        owner: janedoe
+                        owneronTerminate: "4"
+                        passwordExpired: "false"
+                        preferedFirstName: John
+                        secondaryManager: jamessmith
+                        startdate: 01/28/2018T08:00:00+0000
+                        statuskey: "1"
+                        street: s
+                        systemUserName: jdoe
+                        termDate: 04/28/2018T07:00:00+0000
+                        title: Analyst
+                        updatedate: 08/02/2018T04:08:16+0000
+                        updateuser: admin
+                        vendorManager: awsadmin
+                      entitlementsCount: 8
+                      errorCode: "0"
+                      msg: Successful
+                      totalEntitlementCount: 8
+  components:
+    securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
+  
