@@ -364,11 +364,7 @@
                       username: admin
     /oauth/access_token:
       servers:
-        - url: https://{tenant}.saviyntcloud.com/ECM
-          variables:
-            tenant:
-              description: tenant
-              default: example
+        - url: https://qe-eictrunk-aws.saviyntcloud.com/ECM
       post:
         operationId: refreshAuthorizationToken
         tags:
